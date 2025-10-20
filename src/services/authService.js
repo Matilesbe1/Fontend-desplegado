@@ -1,13 +1,13 @@
-export async function register (username, email, password){
+export async function register(username, email, password) {
 
-    try{
+    try {
         const body = {
-            name: username, 
+            name: username,
             email,
             password
         }
-    
-    
+
+
         //Fetch es una funcion nativa de JS para hacer consultas HTTP
         const response_http = await fetch(
             'http://localhost:8080/api/auth/register',
@@ -23,42 +23,39 @@ export async function register (username, email, password){
         )
         //Transformamos el body de respuesta de JSON a objeto de JS 
         const response = await response_http.json()
-    
+
         return response
     }
-    catch(error){
+    catch (error) {
         console.error('Error al registrar:', error)
         throw new Error('Error interno del servidor')
     }
 }
 
-export async function login (email, password){
-    try{
+export async function login(email, password) {
+    try {
         const body = {
-            email, 
+            email,
             password
-        } 
-    
-        const response_http = await fetch(
-                'http://localhost:8080/api/auth/login',
-            {
-                method: 'POST',
-                headers: {
-                    //Indica a mi servidor que voy a enviar un JSON por body
-                    "Content-Type": 'application/json'
-                },
-                //Transformo el objeto de JS a JSON (texto)
-                body: JSON.stringify(body)
-            }
-        )
-        
-        const response = await response_http.json()
-    
-        return response
+        }
+
+        const http_response = await fetch("http://localhost:8080/api/auth/login", {
+            method: "POST",
+            headers: {
+                "Content-type": "application/json"
+            },
+            body: JSON.stringify(
+                body
+            )
+        })
+        const server_response = await http_response.json()
+        console.log(server_response)
+
+        return server_response
 
     }
-    
-    catch(error){
+
+    catch (error) {
         console.error('Error al registrar:', error)
         throw new Error('Error interno del servidor')
     }
