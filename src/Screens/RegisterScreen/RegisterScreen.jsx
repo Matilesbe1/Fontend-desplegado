@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import useForm from '../../hooks/useForm'
 import { register } from '../../services/authService'
 import useFetch from '../../hooks/useFetch'
+import './RegisterScreen.css'
 
 
 
@@ -48,12 +49,12 @@ const RegisterScreen = () => {
         initial_form_state,
         onRegister
     )
-    
+
     console.log(response, loading, error);
-    
+
     return (
         <div>
-            <h1>Registrate</h1>
+            {/* <h1>Registrate</h1>
             <form onSubmit={handleSubmit}>
                 <div className='form-field'>
                     <label htmlFor="username">Nombre de usuario:</label>
@@ -96,7 +97,61 @@ const RegisterScreen = () => {
                         : <button>Registrarse</button>
                 }
 
-            </form>
+            </form> */}
+            <div className='body'>
+                <form className="form" onSubmit={handleSubmit}>
+                    <p className="title">Registro </p>
+                    <p className="message">Regístrate ahora para comenzar</p>
+                    <div className="flex form-field">
+                        <label className='name-input' htmlFor="username">
+                            <input className="input"
+                                type="text"
+                                placeholder
+                                required
+                                value={form_state[REGISTER_FORM_FIELDS.USERNAME]}
+                                name={REGISTER_FORM_FIELDS.USERNAME}
+                                id='username'
+                                onChange={onInputChange} />
+                            <span>Nombre de usuario:</span>
+                        </label>
+                    </div>
+                    <div className='form-field'>
+                        <label className='name-input' htmlFor="email">
+                            <input className="input"
+                                type="text"
+                                placeholder
+                                required
+                                value={form_state[REGISTER_FORM_FIELDS.EMAIL]}
+                                name={REGISTER_FORM_FIELDS.EMAIL}
+                                onChange={onInputChange}
+                                id={'email'} />
+                            <span>Email:</span>
+                        </label>
+                    </div>
+                    <div className='form-field'>
+                        <label className='name-input' htmlFor="password">
+                            <input className="input"
+                                type="password"
+                                placeholder
+                                required
+                                value={form_state[REGISTER_FORM_FIELDS.PASSWORD]}
+                                name={REGISTER_FORM_FIELDS.PASSWORD}
+                                onChange={onInputChange}
+                                id={'password'}
+                            />
+                            <span>Contraseña:</span>
+                        </label>
+                    </div>
+                    {error && <span style={{ color: 'red' }}> {error} </span>}
+                    {response && <span style={{ color: 'green' }}> Usuario registrado con exito! </span>}
+                    {
+                        loading
+                            ? <button disabled className='submit'>Registrando</button>
+                            : <button className='submit'>Registrarse</button>
+                    }
+                    <p className="signin">Ya tienes una cuenta? <a href="./login">Iniciar sesión</a> </p>
+                </form>
+            </div>
         </div>
     )
 }

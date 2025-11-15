@@ -4,6 +4,7 @@ import { login } from '../../services/authService'
 import useForm from '../../hooks/useForm'
 import useFetch from '../../hooks/useFetch'
 import { AuthContext } from '../../Context/AuthContext'
+import './LoginScreen.css'
 
 const LoginScreen = () => {
   const navigate = useNavigate()
@@ -82,7 +83,7 @@ const LoginScreen = () => {
 
   return (
     <div className="Form-container">
-      <form onSubmit={handleSubmit}>
+      {/* <form onSubmit={handleSubmit}>
         <div className="form-field">
           <label htmlFor="email">Email: </label>
           <input type="text" placeholder="jose@algo.com" value={form_state[LOGIN_FORM_FIELDS.EMAIL]} name={LOGIN_FORM_FIELDS.EMAIL} onChange={onInputChange} id={'email'} />
@@ -101,7 +102,50 @@ const LoginScreen = () => {
             ? <button disabled>Loggin In</button>
             : <button>Login</button>
         }
-      </form>
+      </form> */}
+
+      <div className='body Form-container'>
+        <form className="form" onSubmit={handleSubmit}>
+          <p className="title">Login </p>
+          <p className="message">Bienvenido de nuevo</p>
+          <div className='form-field'>
+            <label className='name-input' htmlFor="email">
+              <input className="input"
+                type="text"
+                placeholder
+                required
+                value={form_state[LOGIN_FORM_FIELDS.EMAIL]} 
+                name={LOGIN_FORM_FIELDS.EMAIL} 
+                onChange={onInputChange} 
+                id={'email'} />
+              <span>Email:</span>
+            </label>
+          </div>
+          <div className='form-field'>
+            <label className='name-input' htmlFor="password">
+              <input className="input"
+                type="password"
+                placeholder
+                required
+                value={form_state[LOGIN_FORM_FIELDS.PASSWORD]} 
+                name={LOGIN_FORM_FIELDS.PASSWORD} 
+                onChange={onInputChange} 
+                id={'password'} 
+              />
+              <span>Contraseña:</span>
+            </label>
+          </div>
+          {error && <span style={{ color: 'red' }}> {error} </span>}
+          {response && <span style={{ color: 'green' }}> Usuario logeado con exito! </span>}
+          {
+            loading
+              ? <button disabled className='submit'>Login in</button>
+              : <button className='submit'>Login</button>
+          }
+          <p className="signin">Todavia no tenes una cuenta? <a href="./register">Registrarse</a> </p>
+          
+        </form>
+      </div>
     </div>
   )
 }
