@@ -1,3 +1,5 @@
+import ENVIRONMENT from "../config/environment.js"
+
 export async function register(username, email, password) {
 
     try {
