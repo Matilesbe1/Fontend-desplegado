@@ -1,9 +1,12 @@
 import { useEffect } from "react";
 import { useParams } from "react-router";
 import useFetch from "../../hooks/useFetch.jsx";
-import { getMessagesByChannelId } from "../../services/messagesService.js";
+import { getMessagesByChannelId, createMessagesByChannelId } from "../../services/messagesService.js";
+import CreateNewMessage from "../CreateNewMessage/CreateNewMessage.jsx";
+import { jwtDecode } from "jwt-decode";
+import "./ChannelDetail.css"
 
-const ChannelDetail = () => {
+const ChannelDetail = ({ channel_list }) => {
     const { channel_id, workspace_id } = useParams();
 
     if (!channel_id) {
@@ -27,20 +30,57 @@ const ChannelDetail = () => {
     }, [channel_id, workspace_id]);
 
     console.log("RESPONSE:", response);
-    console.log("ERROR:", error);
-    console.log("LOADING:", loading);
 
+    const onSubmitNewMessage = (form_state) => {
+        console.log(form_state);
+
+        sendRequest(() =>
+            createMessagesByChannelId(workspace_id, channel_id, form_state.content, user_id)
+        );
+    }
+
+    const token = localStorage.getItem('auth_token')
+    const user_id = jwtDecode(token).id
+    console.log(user_id);
+
+
+    /*  if (user_id !== sender_member_id) {
+         return (
+             <div className="otro">
+                 <span>{message}</span>
+             </div>
+         )
+     } else {
+         return (
+             <div className="yo">
+                 <span>{message}</span>
+             </div>
+         )
+     } */
+
+    console.log(user_id);
+    console.log(response?.data.messages);
+    
     return (
-        <div style={{ padding: "20px" }}>
-            {loading && <span>Cargando mensajes...</span>}
-            {error && <span>Error: {error}</span>}
-            {response && response.data && (
-                <ul>
-                    {response.data.map((msg) => (
-                        <li key={msg._id}>{msg.text}</li>
-                    ))}
-                </ul>
-            )}
+        <div className="chat-body">
+            <h2>{ }</h2>
+            <div className="chat-container">
+                <div style={{ padding: "20px" }}>
+                    {loading && <span>Cargando mensajes...</span>}
+                    {error && <span>Error: {error}</span>}
+                    {response && response.data && (
+                        <ul>
+                            {response.data.messages.map((msg) => (
+                                        user_id === msg.member_id
+                                    ? <li key={msg._id} className="mio">{msg.message_content}</li>
+                                    : <li key={msg._id} className="otro">{msg.message_content}</li>
+
+                            ))}
+                        </ul>
+                    )}
+                </div>
+                <CreateNewMessage onSubmit={onSubmitNewMessage} />
+            </div>
         </div>
     );
 };

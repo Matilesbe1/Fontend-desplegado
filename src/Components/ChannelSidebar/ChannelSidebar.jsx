@@ -3,6 +3,7 @@ import ChannelList from '../ChannelList/ChannelList'
 import useFetch from '../../hooks/useFetch'
 import { useParams } from 'react-router'
 import { getChannelList } from '../../services/channelService.js'
+import './ChannelSidebar.css'
 
 const ChannelSidebar = () => {
     const {
@@ -33,13 +34,13 @@ const ChannelSidebar = () => {
     console.log(response, error, loading)
 
     return (
-        <aside>
-            <h3>Canales:</h3>
+        <aside className='sidebar-container'>
+            <h3 className='sidebar-title'>Canales:</h3>
             {
                 loading && <span>Cargando...</span>
             }
             {
-                response && <ChannelList channel_list={response.data.channels}/>
+                response && <ChannelList channel_list={response.data.channels} className='sidebar-channel-list'/>
             }
             {
                 error && <span style={{color: 'red'}}>Error al obtener la lista de canales</span>

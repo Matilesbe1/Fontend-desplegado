@@ -20,7 +20,7 @@ const HomeScreen = () => {
       <h1 className='list-workspace-title'>Lista de espacios de trabajo</h1>
       {
         loading
-        ? <span>Cargando...</span>
+        ? <span className='loading-span'>Cargando...</span>
         : <div className='list-workspace-workspaces-container'>
           {
           response 

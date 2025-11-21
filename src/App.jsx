@@ -6,6 +6,9 @@ import HomeScreen from './Screens/HomeScreen/HomeScreen'
 import AuthMiddleware from './Middleware/AuthMiddleware.jsx'
 import WorkspaceScreen from './Screens/WorkspaceScreen/WorkspaceScreen'
 import ChannelDetail from './Components/ChannelDetail/ChannelDetail'
+import InviteScreen from './Screens/InviteScreen/InviteScreen.jsx'
+import InviteChannelForm from './Components/InviteChannelForm/InviteChannelForm.jsx'
+import ChatScreen from './Screens/ChatScreen/ChatScreen.jsx'
 
 function App() {
 
@@ -19,7 +22,9 @@ function App() {
         <Route element={<AuthMiddleware />} >
           <Route path='/home' element={<HomeScreen />} />
           <Route path='/workspace/:workspace_id' element={<WorkspaceScreen/>}/>
-          <Route path='/workspace/:workspace_id/:channel_id' element={<ChannelDetail/>}/>
+          <Route path='/workspace/.workspace_id/invite' element={<InviteScreen/>}/>
+          <Route path='/workspace/:workspace_id/:channel_id' element={<ChatScreen/>}/>
+          <Route path='/createChannel' element={<InviteChannelForm/>}/>
         </Route>
       </Routes>
     </div>
