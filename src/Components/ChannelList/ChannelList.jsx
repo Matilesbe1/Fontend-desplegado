@@ -17,7 +17,7 @@ const ChannelList = ({ channel_list }) => {
                         (channel) => {
                             return (
                                 <>
-                                <Link key={channel._id} to={`/workspace/${workspace_id}/${channel._id}`}>
+                                <Link key={channel._id} to={`/workspaces/${workspace_id}/channels/${channel._id}/messages`}>
                                     <button className='button2'>{channel.name}</button>
                                 </Link>
                                 </>

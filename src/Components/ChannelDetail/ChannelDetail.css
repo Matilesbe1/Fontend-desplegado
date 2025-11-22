@@ -38,6 +38,12 @@
     color: white;
     margin: 10px;
     width: max-content;
-    /* align */
+    justify-content: flex-end;
+    margin-left: auto;
+    width: max-content;
+    height: auto;
+}
+li{
+    list-style: none;
 }
 

@@ -139,8 +139,8 @@ const LoginScreen = () => {
           {response && <span style={{ color: 'green' }}> Usuario logeado con exito! </span>}
           {
             loading
-              ? <button disabled className='submit'>Login in</button>
-              : <button className='submit'>Login</button>
+              ? <button disabled className='login-submit'>Login in</button>
+              : <button className='login-submit'>Login</button>
           }
           <p className="signin">Todavia no tenes una cuenta? <a href="./register">Registrarse</a> </p>
           

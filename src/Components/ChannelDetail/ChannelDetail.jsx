@@ -60,7 +60,7 @@ const ChannelDetail = ({ channel_list }) => {
 
     console.log(user_id);
     console.log(response?.data.messages);
-    
+
     return (
         <div className="chat-body">
             <h2>{ }</h2>
@@ -71,9 +71,9 @@ const ChannelDetail = ({ channel_list }) => {
                     {response && response.data && (
                         <ul>
                             {response.data.messages.map((msg) => (
-                                        user_id === msg.member_id
-                                    ? <li key={msg._id} className="mio">{msg.message_content}</li>
-                                    : <li key={msg._id} className="otro">{msg.message_content}</li>
+                                user_id === msg.user._id
+                                    ? <li key={msg._id} className="mio">{msg.content}</li>
+                                    : <li key={msg._id} className="otro">{msg.content}</li>
 
                             ))}
                         </ul>
