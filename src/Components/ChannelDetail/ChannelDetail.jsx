@@ -32,7 +32,7 @@ const ChannelDetail = ({ channel_list }) => {
     console.log("RESPONSE:", response);
 
     const onSubmitNewMessage = (form_state) => {
-        console.log(form_state);
+        console.log(form_state.content);
 
         sendRequest(() =>
             createMessagesByChannelId(workspace_id, channel_id, form_state.content, user_id)

@@ -11,7 +11,7 @@ const InviteChannelForm = ({ onSubmit }) => {
     }
 
     const initial_new_channel_state = {
-        [new_channel_form_fields.channel_name]: ''  //esta vacio
+        [new_channel_form_fields.channel_name]: ''  
     }
     const { form_state, onInputChange, handleSubmit } = useForm(
 

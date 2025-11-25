@@ -26,9 +26,7 @@ async function getMessagesByChannelId(workspace_id, channel_id) {
     console.log("OK:", response_http.ok);
 
     if (!response_http.ok) {
-        const text = await response_http.text(); 
-        console.error("RESPUESTA REAL:", text);
-        throw new Error("La API no devolvió JSON válido");
+        throw new Error('Error al obtener la lista de canales')
     }
 
 
@@ -38,6 +36,10 @@ async function getMessagesByChannelId(workspace_id, channel_id) {
 }
     async function createMessagesByChannelId(workspace_id, channel_id, message, user_id) {
         console.log(message);
+        const body = {
+            content: message,
+            sender_member_id: user_id
+        }
 
         const response_http = await fetch(ENVIRONMENT.URL_API + `/api/workspaces/${workspace_id}/channels/${channel_id}/messages`,
             {
@@ -46,7 +48,7 @@ async function getMessagesByChannelId(workspace_id, channel_id) {
                     'Content-type': 'application/json',
                     'Authorization': `Bearer ${getAuthorizationToken()}`
                 },
-                body: JSON.stringify({ content: message, id: user_id })
+                body: JSON.stringify(body)
             }
         )
         console.log(response_http);
