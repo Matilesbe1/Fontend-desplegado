@@ -1,9 +1,10 @@
-import { useParams } from "react-router"
+import { Link, useNavigate, useParams } from "react-router"
 import useForm from "../../hooks/useForm"
 import "./CreateWorkspaceForm.css"
 
 
 const CreateWorkspace = ({ onSubmit }) => {
+    const navigate = useNavigate()
     const new_workspace_form_fields = {
         name: 'name'
     }
@@ -23,7 +24,7 @@ const CreateWorkspace = ({ onSubmit }) => {
 
     return (
         <div className="body-container">
-            <a href={`/home`}><i class="bi bi-arrow-left arrow"></i></a>
+            <Link to={'/home'}><i class="bi bi-arrow-left arrow"></i></Link>
             <form className="form" onSubmit={handleSubmit}>
                 <span className="input-span">
                     <label htmlFor="name" className="label">Nombre del workspace:</label>

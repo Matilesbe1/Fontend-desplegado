@@ -1,4 +1,4 @@
-import { useParams } from "react-router"
+import { Link, useParams } from "react-router"
 import useChannels from "../../hooks/useChannels"
 import useForm from "../../hooks/useForm"
 import { createChannelByWorkspaceId } from "../../services/channelService"
@@ -25,7 +25,8 @@ const InviteChannelForm = ({ onSubmit }) => {
 
     return (
         <div className="body-container">
-            <a href={`/workspace/${workspace_id}`}><i class="bi bi-arrow-left arrow"></i></a>
+            <Link to={`/workspace/${workspace_id}`}><i class="bi bi-arrow-left arrow"></i></Link>
+            
             <form className="form" onSubmit={handleSubmit}>
                 <span className="input-span">
                     <label htmlFor="channel_name" className="label">Nombre del canal:</label>
